@@ -1,9 +1,9 @@
-var board = [[0, 0, 0, 0, 0, 0, 0],
-			 [0, 0, 0, 0, 0, 0, 0],
-			 [0, 0, 0, 0, 0, 0, 0],
-			 [0, 0, 0, 0, 0, 0, 0],
-			 [0, 0, 0, 0, 0, 0, 0],
-			 [0, 0, 0, 0, 0, 0, 0]];
+var board = [["", "", "", "", "", "", ""],
+			 ["", "", "", "", "", "", ""],
+			 ["", "", "", "", "", "", ""],
+			 ["", "", "", "", "", "", ""],
+			 ["", "", "", "", "", "", ""],
+			 ["", "", "", "", "", "", ""]];
 
 function hello() {
 	console.log("Hello, world!");
@@ -29,12 +29,18 @@ function play(column, player) {
 	}
 
 	for(var i = board.length - 1; i >= 0; i--) {
-		if(board[i][column] === 0) {
+		if(board[i][column] === "") {
 			board[i][column] = player;
 			console.log("Made move!");
 			var cell = document.getElementById("" + i + column);
 			if(cell !== null) {
-				cell.innerHTML = board[i][column];
+				//cell.innerHTML = board[i][column];
+				if(player === 1) {
+					cell.id = "player";
+				}
+				else {
+					cell.id = "cpu";
+				}
 			}
 			return true;
 		}
@@ -42,7 +48,6 @@ function play(column, player) {
 	console.log("Illegal move!");
 	return false;
 }
-
 
 var table = document.getElementById("tab");
 for(var j = 0; j < 6; j++) {
@@ -54,6 +59,7 @@ for(var j = 0; j < 6; j++) {
 		cell.innerHTML = board[j][i];
 	}	
 }
+
 var t = document.getElementById("bt");
 var buttonrow = table.insertRow(-1);
 for(var i = 0; i < 7; i++) {
